@@ -1,0 +1,45 @@
+<form id="main" v-cloak>
+
+    <div class="row">
+        <div class="col-md-12 form-group">
+            <label for="photo-title">Select users</label>
+            <div class="users-list">
+                <template v-for="i in users">
+
+                    <button class="btn btn-default" v-on:click.prevent="toggleUser(i, $event)">
+                        {{ i.name }}
+                    </button>
+                </template>
+            </div>
+        </div>
+        <div class="col-md-12 form-group">
+            <label for="photo-title">Photo title</label>
+            <input id="photo-title" class="form-control" type="text" v-model="userSearchString" placeholder="Start typing" />
+        </div>
+        <div class="col-md-12 form-group">
+            <label for="album-title">Album title</label>
+            <input id="album-title" class="form-control" type="text" v-model="albumSearchString" placeholder="Start typing" />
+        </div>
+    </div>
+
+    <div class="row">
+
+    <template v-for="i in photos | searchFor userSearchString albumSearchString selectedUsers">
+
+
+            <div class="col-md-3 col-sm-4 col-xs-12">
+                <a href="#" class="thumbnail">
+                    <div class="caption">
+                        {{ i.title }}
+                    </div>
+                    <div class="image">
+                        <img v-bind:src="i.url" class="img img-responsive full-width" />
+                    </div>
+                </a>
+            </div>
+
+    </template>
+    </div>
+
+
+</form>

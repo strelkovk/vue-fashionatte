@@ -1,0 +1,27 @@
+.users-list .btn {
+    margin: 5px 8px 5px 0;
+}
+
+.image {
+    position: relative;
+    overflow: hidden;
+    padding-bottom: 100%;
+}
+
+.image img {
+    position: absolute;
+}
+
+.thumbnail {
+    position: relative;
+}
+
+.thumbnail .caption {
+    background: rgba(255, 255, 255, .7);
+    z-index: 10;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    overflow: hidden;
+}
