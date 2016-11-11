@@ -2,6 +2,6 @@
 
 $ npm install
 
-$ npm run
+$ npm run build
 
 $ npm start
