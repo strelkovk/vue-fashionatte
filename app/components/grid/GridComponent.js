@@ -2,12 +2,13 @@ import Vue from 'vue';
 import request from 'superagent';
 import template from './GridComponent.html';
 
+//limit on page
 const photoLimit = 24;
 
-
+/**
+ * Filter photos by albums and user, then by title
+ */
 Vue.filter('searchFor', function (value, userSearchString, albumSearchString, selectedUsers) {
-
-    let result = [];
 
     let albums = this.albums;
 
@@ -16,26 +17,28 @@ Vue.filter('searchFor', function (value, userSearchString, albumSearchString, se
     albumSearchString = albumSearchString.trim().toLowerCase();
 
     albums = albums.filter(item => {
+        //Check ownership of selected users
         if (selectedUsers.length > 0 && selectedUsers.indexOf(item.userId) == -1) {
             return false;
         }
+        //check albums by title
         if (albumSearchString.length > 0 && item.title.toLowerCase().indexOf(albumSearchString) == -1) {
             return false;
         }
         return item;
     }).map(item => item.id);
 
-    result = value.filter(item => {
+    return value.filter(item => {
+        //skip if no albums or photo not in albums
         if (albums.length == 0 || albums.indexOf(item.albumId) == -1) {
             return false;
         }
+        //search by photo title
         if (userSearchString.length > 0 && item.title.toLowerCase().indexOf(userSearchString) == -1) {
             return false;
         }
         return item;
     }).slice(0, photoLimit);
-
-    return result;
 });
 
 const GridComponent = Vue.extend({
@@ -57,10 +60,12 @@ const GridComponent = Vue.extend({
         toggleUser(i, e) {
             i.selected = !i.selected;
             e.target.className = i.selected ? 'btn btn-primary' : 'btn btn-default';
+            //store only user IDs
             this.selectedUsers = this.users.filter(i => i.selected).map(i => i.id);
         },
         search() {
             var th = this;
+            //fetch all data from API
             request
                 .get('https://jsonplaceholder.typicode.com/users')
                 .set('Accept', 'application/json')

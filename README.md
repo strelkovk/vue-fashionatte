@@ -2,6 +2,6 @@
 
 $ npm install
 
-$ npm run watch
+$ npm run
 
 $ npm start
