@@ -1,5 +1,4 @@
 import Vue from 'vue';
-import Pusher from 'pusher-js';
 import template from './AppComponent.html';
 import GridComponent from './grid/GridComponent';
 
