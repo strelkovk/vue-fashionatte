@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "live-server --port=3004",
+    "build": "webpack",
     "watch": "webpack -w"
   },
   "keywords": [],
